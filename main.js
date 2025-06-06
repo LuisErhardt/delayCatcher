@@ -3,7 +3,7 @@ import { createClient } from "db-vendo-client";
 import { profile as dbProfile } from "db-vendo-client/p/db/index.js";
 
 try {
-  const userAgent = "test"; // adapt this to your project!
+  const userAgent = "https://github.com/LuisErhardt/delayCatcher"; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
 
   const time = new Date();
