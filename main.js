@@ -9,7 +9,7 @@ try {
   const userAgent = "https://github.com/LuisErhardt/delayCatcher"; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
 
-  const time = new Date();
+  const time = new Date("June 7, 2025");
 
   for (let i = 0; i <= 23; i++) {
     time.setHours(i, 0, 0, 0);
