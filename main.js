@@ -9,14 +9,12 @@ try {
   const userAgent = "https://github.com/LuisErhardt/delayCatcher"; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
 
-  const time = new Date("June 1, 2025");
-  for (let j = 0; j < 7; j++) {
-    for (let i = 0; i <= 23; i++) {
-      time.setHours(i, 0, 0, 0);
-      console.log(`Checking arrivals on ${time.toLocaleString("de-DE")}`);
-      await getLateArrivalsAtStation(time, client, 8000207);
-    }
-    time.setDate(time.getDate() + 1);
+  const time = new Date();
+
+  for (let i = 0; i <= 23; i++) {
+    time.setHours(i, 0, 0, 0);
+    console.log(`Checking arrivals on ${time.toLocaleString("de-DE")}`);
+    await getLateArrivalsAtStation(time, client, 8000207);
   }
 } catch (error) {
   console.error("An error occurred:", error);
