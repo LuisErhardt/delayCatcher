@@ -5,8 +5,7 @@ import { eintragExistiert } from "./util.js";
 function writeCSV(data, date) {
   // Aktuellen Monat und Tag mit führender 0
   const monat = String(date.getMonth() + 1).padStart(2, "0");
-  const tag = String(date.getDate()).padStart(2, "0");
-  const dateiname = `data/delays${tag}_${monat}.csv`;
+  const dateiname = `data/delays${monat}.csv`;
 
   // Prüfen, ob Datei schon existiert
   const dateiExistiert = fs.existsSync(dateiname);

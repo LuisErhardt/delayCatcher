@@ -1,0 +1,20 @@
+Startbahnhof;Zugnummer;Zielbahnhof;Ankunft_Plan;Ankunft_tatsächlich;Verspätung
+Hamm(Westf)Hbf;RE 1 (26834);Köln Hbf;31.05.2025, 22:12;01.06.2025, 00:03;112
+Aachen Hbf;RE 1 (26845);Köln Hbf;01.06.2025, 01:44;01.06.2025, 03:52;129
+Bedburg(Erft);RB 38 (10289);Köln Hbf;01.06.2025, 01:28;01.06.2025, 03:58;150
+Hamm(Westf)Hbf;RE 1 (26800);Köln Hbf;01.06.2025, 05:12;01.06.2025, 06:26;75
+Hamm(Westf)Hbf;RE 1 (26810);Köln Hbf;01.06.2025, 10:12;01.06.2025, 11:13;62
+Koblenz Hbf;RB 26 (25432);Köln Hbf;02.06.2025, 18:02;02.06.2025, 19:15;73
+Hamm(Westf)Hbf;RE 1 (26838);Köln Hbf;03.06.2025, 00:12;03.06.2025, 01:38;87
+Hamm(Westf)Hbf;RE 1 (26802);Köln Hbf;03.06.2025, 06:12;03.06.2025, 07:37;86
+Euskirchen;RB 24 (10448);Köln Hbf;03.06.2025, 21:12;03.06.2025, 22:20;68
+Trier Hbf;RE 12 (4188);Köln Hbf;03.06.2025, 21:56;03.06.2025, 23:16;80
+Friedrichsfeld(Niederrhein);RE 5 (28533);Köln Hbf;04.06.2025, 21:29;04.06.2025, 22:46;78
+Friedrichsfeld(Niederrhein);RE 5 (28535);Köln Hbf;04.06.2025, 22:29;04.06.2025, 23:33;64
+Bonn-Mehlem;RB 48 (17354);Köln Hbf;05.06.2025, 17:22;05.06.2025, 18:34;72
+Krefeld Hbf;RE 28546 (28546);Köln Hbf;05.06.2025, 17:18;05.06.2025, 18:58;101
+Euskirchen;RE 22 (10054);Köln Hbf;05.06.2025, 21:39;05.06.2025, 22:39;60
+Koblenz Hbf;RE 5 (28536);Köln Hbf;05.06.2025, 22:28;05.06.2025, 23:55;88
+Koblenz Hbf;RE 5 (28538);Köln Hbf;05.06.2025, 23:28;06.06.2025, 01:19;111
+Koblenz Hbf;RB 26 (25444);Köln Hbf;06.06.2025, 00:02;06.06.2025, 01:23;81
+Hamm(Westf)Hbf;RE 1 (26826);Köln Hbf;06.06.2025, 18:12;06.06.2025, 20:30;138

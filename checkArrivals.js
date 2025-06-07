@@ -21,7 +21,7 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
     const date = parseDate(arrival.when);
     const delay = arrival.delay !== null ? arrival.delay : 0;
 
-    if (arrival.line.mode === "train" && arrival.line.product === "regional" && delay >= 1200) {
+    if (arrival.line.mode === "train" && arrival.line.product === "regional" && delay >= 3600) {
       const message = `Ankunft in ${arrival.stop.name}: ${arrival.line.name} (${arrival.line.fahrtNr}) aus ${
         arrival.provenance
       }, Zeit: ${date} mit ${Math.round(delay / 60)} Minuten Verspätung`;
