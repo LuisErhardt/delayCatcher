@@ -11,6 +11,8 @@
   "author": "Luis Erhardt",
   "license": "ISC",
   "dependencies": {
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
     "db-vendo-client": "^6.8.2",
     "dotenv": "^16.5.0",
     "nodemailer": "^7.0.3",

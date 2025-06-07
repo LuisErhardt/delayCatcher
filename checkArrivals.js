@@ -1,87 +1,47 @@
-import sendMail from "./mail.js";
-import dotenv from "dotenv";
+import { writeCSV } from "./writeFiles.js";
+import { parseDate } from "./util.js";
 
-dotenv.config();
-
-// 8000086 Duisburg Hbf Code
-// 8000263 Münster Hbf Code
-
-/** * Fetches late arrivals for the RE 2 and RE 42 lines at Münster Hbf.
- * If the delay is 60 minutes or more, it sends an email notification.
+/** * Fetches late arrivals at a specific station.
+ * If the delay is 60 minutes or more for regional trains, it writes the data to a CSV file.
  * @param {Date} time - The time to check for arrivals.
  * @param {Object} client - The client to fetch arrivals from.
+ * @param {string} stationCode - The code of the station to check.
  **/
-async function getLateArrivalsMunster(time, client) {
-  const { arrivals, _ } = await client.arrivals("8000263", {
+async function getLateArrivalsAtStation(time, client, stationCode) {
+  stationCode = stationCode.toString();
+
+  const { arrivals, _ } = await client.arrivals(stationCode, {
     when: time,
-    duration: 10,
+    duration: 59,
   });
 
+  // console.log(arrivals);
+
   for (const arrival of arrivals) {
-    if (
-      (arrival.line.name === "RE 2" && arrival.provenance === "Düsseldorf Hbf") ||
-      (arrival.line.name === "RE 42" && arrival.provenance === "Mönchengladbach Hbf")
-    ) {
-      let date = Date.parse(arrival.when);
-      date = new Intl.DateTimeFormat("de-DE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-      }).format(date);
+    const date = parseDate(arrival.when);
+    const delay = arrival.delay !== null ? arrival.delay : 0;
 
-      const delay = arrival.delay !== null ? arrival.delay : 0;
+    if (arrival.line.mode === "train" && arrival.line.product === "regional" && delay >= 1200) {
+      const message = `Ankunft in ${arrival.stop.name}: ${arrival.line.name} (${arrival.line.fahrtNr}) aus ${
+        arrival.provenance
+      }, Zeit: ${date} mit ${Math.round(delay / 60)} Minuten Verspätung`;
+      console.log(message);
 
-      if (delay >= 3600) {
-        const message = `Ankunft in Münster(Westf)Hbf: ${arrival.line.name} (${
-          arrival.line.fahrtNr
-        }), Zeit: ${date} mit ${Math.round(delay / 60)} Minuten Verspätung`;
-        console.log(message);
-        sendMail(message, process.env.EMAIL_RECEIVER);
-      }
+      const ankunft_plan = parseDate(arrival.plannedWhen);
+      const ankunft_real = parseDate(arrival.when);
+      const data = [
+        {
+          Startbahnhof: arrival.provenance,
+          Zugnummer: `${arrival.line.name} (${arrival.line.fahrtNr})`,
+          Zielbahnhof: arrival.stop.name,
+          Ankunft_Plan: ankunft_plan,
+          Ankunft_tatsächlich: ankunft_real,
+          Verspätung: Math.round(delay / 60).toString(),
+        },
+      ];
+      writeCSV(data, time);
     }
   }
 }
 
-/** * Fetches late arrivals for the RE 2 and RE 42 lines at Duisburg Hbf.
- * If the delay is 60 minutes or more, it sends an email notification.
- * @param {Date} time - The time to check for arrivals.
- * @param {Object} client - The client to fetch arrivals from.
- **/
-async function getLateArrivalsDuisburg(time, client) {
-  const { arrivals, _ } = await client.arrivals("8000086", {
-    when: time,
-    duration: 10,
-  });
-
-  for (const arrival of arrivals) {
-    if (
-      (arrival.line.name === "RE 2" && arrival.provenance === "Osnabrück Hbf") ||
-      (arrival.line.name === "RE 42" && arrival.provenance === "Münster(Westf)Hbf")
-    ) {
-      let date = Date.parse(arrival.when);
-      date = new Intl.DateTimeFormat("de-DE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: false,
-      }).format(date);
-
-      const delay = arrival.delay !== null ? arrival.delay : 0;
-
-      if (delay >= 3600) {
-        const message = `Ankunft in Duisburg Hbf: ${arrival.line.name} (${
-          arrival.line.fahrtNr
-        }), Zeit: ${date} mit ${Math.round(delay / 60)} Minuten Verspätung`;
-        console.log(message);
-        sendMail(message, process.env.EMAIL_RECEIVER);
-      }
-    }
-  }
-}
-
-export { getLateArrivalsMunster, getLateArrivalsDuisburg };
+export { getLateArrivalsAtStation };
