@@ -40,7 +40,6 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
         },
       ];
       writeCSV(data, time);
-      insertArrival(data);
     }
   }
 }
