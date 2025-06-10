@@ -1,6 +1,41 @@
 import fs from "fs";
 import { createObjectCsvWriter } from "csv-writer";
 import { eintragExistiert } from "./util.js";
+import dotenv from "dotenv";
+import pg from "pg";
+
+dotenv.config();
+const { Pool } = pg;
+
+async function insertArrival(row) {
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+  });
+
+  const query = `
+    INSERT INTO arrivals (
+      startbahnhof, zugnummer, zielbahnhof, ankunft_plan, ankunft_tatsaechlich, verspaetung_minuten
+    ) VALUES ($1, $2, $3, $4, $5, $6)
+  `;
+
+  row = row[0];
+  const values = [
+    row.Startbahnhof,
+    row.Zugnummer,
+    row.Zielbahnhof,
+    row.Ankunft_Plan,
+    row["Ankunft_tatsächlich"],
+    parseInt(row.Verspätung, 10),
+  ];
+
+  try {
+    await pool.query(query, values);
+    console.log(`✔ Uploaded: ${row.Zugnummer} → ${row.Zielbahnhof}`);
+  } catch (err) {
+    console.error(`❌ Fehler bei ${row.Zugnummer}:`, err.message);
+  }
+}
 
 function writeCSV(data, date) {
   // Aktuellen Monat und Tag mit führender 0
@@ -32,4 +67,4 @@ function writeCSV(data, date) {
   });
 }
 
-export { writeCSV };
+export { writeCSV, insertArrival };

@@ -1,4 +1,4 @@
-import { writeCSV } from "./writeFiles.js";
+import { writeCSV, insertArrival } from "./writeFiles.js";
 import { parseDate } from "./util.js";
 
 /** * Fetches late arrivals at a specific station.
@@ -40,6 +40,7 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
         },
       ];
       writeCSV(data, time);
+      insertArrival(data);
     }
   }
 }
