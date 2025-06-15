@@ -5,7 +5,11 @@ import { eintragExistiert } from "./util.js";
 function writeCSV(data, date) {
   // Aktuellen Monat und Tag mit führender 0
   const monat = String(date.getMonth() + 1).padStart(2, "0");
-  const dateiname = `data/delays${monat}.csv`;
+  const dir = "data";
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const dateiname = `${dir}/delays${monat}.csv`;
 
   // Prüfen, ob Datei schon existiert
   const dateiExistiert = fs.existsSync(dateiname);
