@@ -1,4 +1,4 @@
-import { writeCSV, insertArrival } from "./writeFiles.js";
+import { writeCSV } from "./writeFiles.js";
 import { parseDate } from "./util.js";
 
 /** * Fetches late arrivals at a specific station.
@@ -15,18 +15,14 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
     duration: 59,
   });
 
-  // console.log(arrivals);
+  if (!arrivals || arrivals.length === 0) {
+    console.log("No arrivals found! Check the stationCode.");
+  }
 
   for (const arrival of arrivals) {
-    const date = parseDate(arrival.when);
     const delay = arrival.delay !== null ? arrival.delay : 0;
 
     if (arrival.line.mode === "train" && arrival.line.product === "regional" && delay >= 3600) {
-      const message = `Ankunft in ${arrival.stop.name}: ${arrival.line.name} (${arrival.line.fahrtNr}) aus ${
-        arrival.provenance
-      }, Zeit: ${date} mit ${Math.round(delay / 60)} Minuten Verspätung`;
-      console.log(message);
-
       const ankunft_plan = parseDate(arrival.plannedWhen);
       const ankunft_real = parseDate(arrival.when);
       const data = [

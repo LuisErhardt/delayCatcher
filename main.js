@@ -5,16 +5,25 @@ import { profile as dbProfile } from "db-vendo-client/p/db/index.js";
 // 8000207 Köln Hbf
 // 8000086 Duisburg Hbf
 
+const stationCode = parseInt(process.argv[2], 10);
+
+if (isNaN(stationCode)) {
+  console.error("Please provide a valid stationCode as argument, e.g.: node main.js 8000207");
+  process.exit(1);
+}
+
 try {
   const userAgent = "https://github.com/LuisErhardt/delayCatcher"; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
+
+  console.log(`Checking for delays with stationCode: ${stationCode}`);
 
   const time = new Date();
 
   for (let i = 0; i <= 23; i++) {
     time.setHours(i, 0, 0, 0);
     console.log(`Checking arrivals on ${time.toLocaleString("de-DE")}`);
-    await getLateArrivalsAtStation(time, client, 8000207);
+    await getLateArrivalsAtStation(time, client, stationCode);
   }
 } catch (error) {
   console.error("An error occurred:", error);
