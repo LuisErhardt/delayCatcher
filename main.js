@@ -1,4 +1,4 @@
-import { getLateArrivalsAtStation } from "./checkArrivals.js";
+import { getLateArrivalsAtStation } from "./src/checkArrivals.js";
 import { createClient } from "db-vendo-client";
 import { profile as dbProfile } from "db-vendo-client/p/db/index.js";
 

@@ -4,8 +4,9 @@ import { eintragExistiert } from "./util.js";
 
 function writeCSV(data, date) {
   // Aktuellen Monat und Tag mit führender 0
+  const year = date.getFullYear();
   const monat = String(date.getMonth() + 1).padStart(2, "0");
-  const dir = "data";
+  const dir = `data/${year}`;
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
