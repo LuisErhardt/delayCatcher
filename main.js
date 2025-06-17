@@ -1,6 +1,9 @@
 import { getLateArrivalsAtStation } from "./src/checkArrivals.js";
 import { createClient } from "db-vendo-client";
 import { profile as dbProfile } from "db-vendo-client/p/db/index.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // 8000207 Köln Hbf
 // 8000086 Duisburg Hbf
@@ -13,7 +16,7 @@ if (isNaN(stationCode)) {
 }
 
 try {
-  const userAgent = "https://github.com/LuisErhardt/delayCatcher"; // adapt this to your project!
+  const userAgent = process.env.USERAGENT; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
 
   console.log(`Checking for delays with stationCode: ${stationCode}`);
