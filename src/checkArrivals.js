@@ -48,7 +48,7 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
 // 8000086 Duisburg Hbf
 
 async function getLateDeparturesAtDuisburgToMuenster(time, client) {
-  console.log("Suche nach Verstätungen für " + time.toLocaleString("de-DE"));
+  console.log("Suche nach Verspätungen für " + time.toLocaleString("de-DE"));
   const stationCode = "8000086"; // Duisburg Hbf
 
   const { departures, _ } = await client.departures(stationCode, {
@@ -63,15 +63,22 @@ async function getLateDeparturesAtDuisburgToMuenster(time, client) {
   for (const departure of departures) {
     let delay = departure.delay !== null ? departure.delay : 0;
 
+    const departureTime = new Date(departure.when);
+    const cutoffTime = new Date(time);
+    cutoffTime.setMinutes(cutoffTime.getMinutes() + 30);
+
     if (
       (departure.line.name === "RE 2" || departure.line.name === "RE 42") &&
       (departure.direction === "Münster(Westf)Hbf" || departure.direction === "Osnabrück Hbf") &&
+      departureTime < cutoffTime &&
       delay >= 20 * 60
     ) {
       delay = Math.round(delay / 60);
       const mailMessage = {};
       mailMessage.subject = `${departure.line.name} in Richtung ${departure.direction}`;
-      mailMessage.text = `${departure.line.name} in Richtung ${departure.direction} war am Bahnhof Duisburg Hbf ${delay} min zu spät.`;
+      mailMessage.text = `${departure.line.name} in Richtung ${
+        departure.direction
+      } war am Bahnhof Duisburg Hbf ${delay} min zu spät. Abfahrt: ${parseDate(departureTime)}`;
       sendMail(mailMessage, process.env.EMAIL_RECEIVER);
     }
   }
