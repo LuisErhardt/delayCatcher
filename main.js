@@ -22,6 +22,7 @@ try {
   console.log(`Checking for delays with stationCode: ${stationCode}`);
 
   const time = new Date();
+  time.setDate(time.getDate() - 1);
 
   for (let i = 0; i <= 23; i++) {
     time.setHours(i, 0, 0, 0);

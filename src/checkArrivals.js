@@ -23,10 +23,20 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
     console.log("No arrivals found! Check the stationCode.");
   }
 
+  const cutoffTime = new Date(time);
+  cutoffTime.setHours(cutoffTime.getHours() + 1);
+
   for (const arrival of arrivals) {
     const delay = arrival.delay !== null ? arrival.delay : 0;
 
-    if (arrival.line.mode === "train" && arrival.line.product === "regional" && delay >= 3600) {
+    const arrivalTime = new Date(arrival.when);
+
+    if (
+      arrival.line.mode === "train" &&
+      arrival.line.product === "regional" &&
+      delay >= 3600 &&
+      arrivalTime < cutoffTime
+    ) {
       const ankunft_plan = parseDate(arrival.plannedWhen);
       const ankunft_real = parseDate(arrival.when);
       const data = [
