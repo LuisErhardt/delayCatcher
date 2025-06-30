@@ -88,7 +88,7 @@ async function getLateDeparturesAtDuisburgToMuenster(time, client) {
       mailMessage.subject = `${departure.line.name} in Richtung ${departure.direction}`;
       mailMessage.text = `${departure.line.name} in Richtung ${
         departure.direction
-      } war am Bahnhof Duisburg Hbf ${delay} min zu spät. Abfahrt: ${parseDate(departureTime)}`;
+      } war am Bahnhof Duisburg Hbf ${delay} min zu spät. Ankunft: ${parseDate(departureTime)}`;
       sendMail(mailMessage, process.env.EMAIL_RECEIVER);
     }
   }
