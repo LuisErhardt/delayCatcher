@@ -1,0 +1,17 @@
+Startbahnhof;Zugnummer;Zielbahnhof;Ankunft_Plan;Ankunft_tatsächlich;Verspätung
+Aachen Hbf;RE 1 (26805);Köln Hbf;01.07.2025, 05:44;01.07.2025, 06:47;63
+Euskirchen;RB 22 (70290);Köln Hbf;01.07.2025, 11:39;01.07.2025, 12:53;74
+Aachen Hbf;RE 1 (26819);Köln Hbf;01.07.2025, 12:44;01.07.2025, 14:52;129
+Aachen Hbf;RE 9 (10917);Köln Hbf;01.07.2025, 14:12;01.07.2025, 15:29;78
+Krefeld Hbf;RE 7 (17422);Köln Hbf;01.07.2025, 15:18;01.07.2025, 16:27;69
+Siegen Hbf;RE 9 (10920);Köln Hbf;01.07.2025, 15:36;01.07.2025, 16:59;83
+Mönchengladbach Hbf;RB 27 (10629);Köln Hbf;01.07.2025, 16:35;01.07.2025, 17:42;67
+Siegen Hbf;RE 9 (10922);Köln Hbf;01.07.2025, 16:36;01.07.2025, 18:13;98
+Koblenz Hbf;RB 27 (10626);Köln Hbf;01.07.2025, 18:22;01.07.2025, 19:34;72
+Siegen Hbf;RE 9 (10928);Köln Hbf;01.07.2025, 19:39;01.07.2025, 20:47;69
+Siegen Hbf;RE 9 (10926);Köln Hbf;01.07.2025, 18:37;01.07.2025, 21:40;184
+Siegen Hbf;RE 9 (10930);Köln Hbf;01.07.2025, 20:36;01.07.2025, 21:55;80
+Hamm(Westf)Hbf;RE 1 (26830);Köln Hbf;01.07.2025, 20:12;01.07.2025, 21:57;106
+Rheine;RE 7 (17431);Köln Hbf;01.07.2025, 20:38;01.07.2025, 22:04;87
+Hamm(Westf)Hbf;RE 1 (26832);Köln Hbf;01.07.2025, 21:12;01.07.2025, 22:18;66
+Siegen Hbf;RE 9 (10934);Köln Hbf;01.07.2025, 22:36;01.07.2025, 23:38;62
