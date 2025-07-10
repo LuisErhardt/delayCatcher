@@ -14,7 +14,7 @@ node main.js <stationCode>
 
 `<stationCode>` ist dabei die [Interne Bahnhofsnummer (IBNR)](https://de.wikipedia.org/wiki/Interne_Bahnhofsnummer), die jeden Bahnhof identifiziert. Der Code für Köln Hbf ist beispielsweise `8000207`.
 
-Der Befehl ruft alle Verspätungen für den aktuellen Tag ab und fügt die Daten zu `data/<Jahr>/delays<Monatsnummer>.csv` hinzu, bzw. erstellt die Datei, falls diese noch nicht existiert.
+Der Befehl ruft alle Verspätungen für den vorherigen Tag ab und fügt die Daten zu `data/<Jahr>/delays<Monatsnummer>.csv` hinzu, bzw. erstellt die Datei, falls diese noch nicht existiert.
 
 Wenn eine gefundene Verspätung schon in der csv steht, dann wird sie nicht mehr hinzugefügt.
 
