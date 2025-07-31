@@ -1,12 +1,13 @@
 import fs from "fs";
 import { createObjectCsvWriter } from "csv-writer";
 import { eintragExistiert } from "./util.js";
+import path from "path";
 
-function writeCSV(data, date) {
+function writeCSV(data, date, directory) {
   // Aktuellen Monat und Tag mit führender 0
   const year = date.getFullYear();
   const monat = String(date.getMonth() + 1).padStart(2, "0");
-  const dir = `data/${year}`;
+  const dir = path.join(directory, `year`);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }

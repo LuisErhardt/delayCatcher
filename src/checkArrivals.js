@@ -11,7 +11,7 @@ dotenv.config();
  * @param {Object} client - The client to fetch arrivals from.
  * @param {string} stationCode - The code of the station to check.
  **/
-async function getLateArrivalsAtStation(time, client, stationCode) {
+async function getLateArrivalsAtStation(time, client, stationCode, path) {
   stationCode = stationCode.toString();
 
   const { arrivals, _ } = await client.arrivals(stationCode, {
@@ -49,7 +49,7 @@ async function getLateArrivalsAtStation(time, client, stationCode) {
           Verspätung: Math.round(delay / 60).toString(),
         },
       ];
-      writeCSV(data, time);
+      writeCSV(data, time, path);
     }
   }
 }

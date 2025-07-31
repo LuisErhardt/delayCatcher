@@ -15,6 +15,8 @@ if (isNaN(stationCode)) {
   process.exit(1);
 }
 
+const path = process.argv[3] || "";
+
 try {
   const userAgent = process.env.USERAGENT; // adapt this to your project!
   const client = createClient(dbProfile, userAgent);
@@ -27,7 +29,7 @@ try {
   for (let i = 0; i <= 23; i++) {
     time.setHours(i, 0, 0, 0);
     console.log(`Checking arrivals on ${time.toLocaleString("de-DE")}`);
-    await getLateArrivalsAtStation(time, client, stationCode);
+    await getLateArrivalsAtStation(time, client, stationCode, path);
   }
 } catch (error) {
   console.error("An error occurred:", error);
