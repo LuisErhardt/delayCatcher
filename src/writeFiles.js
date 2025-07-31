@@ -7,7 +7,7 @@ function writeCSV(data, date, directory) {
   // Aktuellen Monat und Tag mit führender 0
   const year = date.getFullYear();
   const monat = String(date.getMonth() + 1).padStart(2, "0");
-  const dir = path.join(directory, `year`);
+  const dir = path.join(directory, `${year}`);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
